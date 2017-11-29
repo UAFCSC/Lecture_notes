@@ -1,0 +1,72 @@
+# Introduction
+- What is BSD? (Generalizations...)
+	- FreeBSD
+		- Most popular for general use
+	- OpenBSD
+		- Strong focus on security
+		- Child projects
+			- OpenSSH
+			- PF
+			- CARP
+			- LibreSSL
+	- NetBSD
+		- Runs on everythiing
+- Why use FreeBSD over Linux?
+	- It irritates Arsh
+	- Logo is a cool demon, not a dumb-looking penguin
+	- Handbook
+	- Singular project
+	- Smaller community
+		- More welcoming
+		- Easier to get help
+		- Easier to get involved
+	- Less restrictive license
+		- ZFS
+		- dtrace
+	- Jails
+	- Software distribution
+		- pkgng for most stuff
+		- Ports tree if you need to customize the build
+	- IPFW and PF are a million times easier to use than iptables
+- Why not?
+	- Smaller community
+	- Fewer resources available online for help
+	- Less likely to run into it in your career or CCDC
+	- Software compatibility
+		- There is a Linux emulation layer for closed-source software, but it's hit-or-miss
+	- Harder to get started
+		- PC-BSD makes it easier
+- What's the same?
+	- Most basic commands, with occasionally different flags
+	- General directory structure
+- What's different?
+	- User-installed software ends up in `/usr/local` instead of `/`
+	- File systems
+		- UFS
+			- Generic use
+		- ZFS
+			- More resource-heavy
+			- Really, really awesome
+	- By default, no `sudo` or `nano`
+	- Firewalls
+	- Ports tree
+
+# Let's Do Something
+- Log in as root
+- Install sl through ports
+	- `portsnap fetch`
+	- `portsnap extract`
+	- cd `/usr/ports/games/sl`
+	- `make`
+	- `make install`
+- Ports are kind of a pain, let's use `pkg`
+	- `pkg install sudo nano`
+	- How would we go about setting up an Apache webserver like we did last week?
+		- `pkg search apache | less`
+		- `pkg install apache24`
+		- `service apache24 start`
+			- It's not enabled? Hmm...
+		- `nano /etc/rc.conf`
+			- OR: `sysrc apache24_enable=YES`
+		- `service apache24 start`
+		- `sockstat -46`
